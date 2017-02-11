@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'node-uuid';
 
 import { TodoList } from './todo-list.jsx';
 import { AddTodo } from './add-todo.jsx';
@@ -12,27 +13,35 @@ export class Main extends React.Component {
             searchText: '',
             todos: [
                 {
-                    id: 1,
+                    id: uuid(),
                     text: 'Walk the dog'
                 },
                 {
-                    id: 2,
+                    id: uuid(),
                     text: 'Clean the house'
                 },
                 {
-                    id: 3,
+                    id: uuid(),
                     text: 'Feed the cat'
                 },
                 {
-                    id: 4,
+                    id: uuid(),
                     text: 'Learn React'
                 }
             ]
         };
     }
 
-    handleAddTodo(text) {
-        console.log('New todo ' + text);
+    handleAddTodo = (text) => {
+        this.setState({
+            todos: [
+                ...this.state.todos,
+                {
+                    id: uuid(),
+                    text
+                }
+            ]
+        });
     }
 
     handleSearch(showCompleted, searchText) {
