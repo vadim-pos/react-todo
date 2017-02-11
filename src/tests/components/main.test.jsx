@@ -22,4 +22,18 @@ describe('Main', () => {
             expect(main.state.todos[0].text).toBe(todoText);
         });
     });
+
+    it('should toggle completed prop by handleToggle()', () => {
+        let todoTest = {
+            id: 123,
+            text: 'Test Test',
+            completed: false
+        };
+        let main = TestUtils.renderIntoDocument(<Main/>);
+        main.setState({todos: [todoTest]});
+
+        expect(main.state.todos[0].completed).toBe(false);
+        main.handleToggle(todoTest.id);
+        expect(main.state.todos[0].completed).toBe(true);
+    });
 });
