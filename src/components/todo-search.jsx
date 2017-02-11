@@ -1,0 +1,26 @@
+import React from 'react';
+
+export class TodoSearch extends React.Component {
+    handleSearch = () => {
+        let showCompleted = this.refs.showCompleted.checked,
+            searchText    = this.refs.searchText.value;
+
+        this.props.onSearch(showCompleted, searchText);
+    }
+
+    render() {
+        return(
+            <div>
+                <div>
+                    <input type="text" href="searchText" onChange={this.handleSearch} placeholder="Search todos"/>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" ref="showCompleted" onChange={this.handleSearch}/>
+                        Show completed todos
+                    </label>
+                </div>
+            </div>
+        );
+    }
+}

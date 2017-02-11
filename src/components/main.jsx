@@ -2,11 +2,14 @@ import React from 'react';
 
 import { TodoList } from './todo-list.jsx';
 import { AddTodo } from './add-todo.jsx';
+import { TodoSearch } from './todo-search.jsx';
 
 export class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            showCompleted: false,
+            searchText: '',
             todos: [
                 {
                     id: 1,
@@ -32,10 +35,18 @@ export class Main extends React.Component {
         console.log('New todo ' + text);
     }
 
+    handleSearch(showCompleted, searchText) {
+        this.setState({
+            showCompleted,
+            searchText: searchText.toLowerCase()
+        });
+    }
+
     render() {
         let {todos} = this.state;
         return(
             <div>
+                <TodoSearch onSearch={this.handleSearch}/>
                 <TodoList todos={todos}/>
                 <AddTodo onAddTodo={this.handleAddTodo}/>
             </div>
