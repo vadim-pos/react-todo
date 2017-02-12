@@ -22,4 +22,12 @@ describe('TodoList', () => {
 
         expect(todosComponents.length).toBe(todos.length);
     });
+
+    it('shold render message if no todos passed', () => {
+        let todos = [];
+        let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+        let $elem = $(ReactDOM.findDOMNode(todoList));
+
+        expect($elem.find('.container__message').length).toBe(1);
+    });
 });

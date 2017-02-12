@@ -10,7 +10,7 @@ export class TodoSearch extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="container__header">
                 <div>
                     <input type="text" ref="searchText" onChange={this.handleSearch} placeholder="Search todos"/>
                 </div>
