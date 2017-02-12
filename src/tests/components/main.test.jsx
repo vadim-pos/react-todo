@@ -21,19 +21,65 @@ describe('Main', () => {
 
             expect(main.state.todos[0].text).toBe(todoText);
         });
+
+        it('should set createdAt prop as a number of milliseconds', () => {
+            let todoText = 'Test Test';
+            let main = TestUtils.renderIntoDocument(<Main/>);
+
+            main.setState({todos: []});
+            main.handleAddTodo(todoText);
+
+            expect(main.state.todos[0].createdAt).toBeA('number');
+        });
     });
 
-    it('should toggle completed prop by handleToggle()', () => {
-        let todoTest = {
-            id: 123,
-            text: 'Test Test',
-            completed: false
-        };
-        let main = TestUtils.renderIntoDocument(<Main/>);
-        main.setState({todos: [todoTest]});
+    describe('handleToggle', () => {
 
-        expect(main.state.todos[0].completed).toBe(false);
-        main.handleToggle(todoTest.id);
-        expect(main.state.todos[0].completed).toBe(true);
+        it('should toggle completed prop of an item', () => {
+            let todoTest = {
+                id: 123,
+                text: 'Test Test',
+                completed: false,
+                createdAt: 0,
+                completedAt: undefined
+            };
+            let main = TestUtils.renderIntoDocument(<Main/>);
+            main.setState({todos: [todoTest]});
+
+            expect(main.state.todos[0].completed).toBe(false);
+            main.handleToggle(todoTest.id);
+            expect(main.state.todos[0].completed).toBe(true);
+        });
+
+        it('should set completedAt prop as a number of milliseconds for completed item', () => {
+            let todoTest = {
+                id: 123,
+                text: 'Test Test',
+                completed: false,
+                createdAt: 0,
+                completedAt: 1232142
+            };
+            let main = TestUtils.renderIntoDocument(<Main/>);
+            main.setState({todos: [todoTest]});
+
+            main.handleToggle(todoTest.id);
+            expect(main.state.todos[0].completedAt).toBeA('number');
+        });
+
+        it('should set completedAt prop as undefined for incompleted item', () => {
+            let todoTest = {
+                id: 123,
+                text: 'Test Test',
+                completed: true,
+                createdAt: 0,
+                completedAt: undefined
+            };
+            let main = TestUtils.renderIntoDocument(<Main/>);
+            main.setState({todos: [todoTest]});
+
+            main.handleToggle(todoTest.id);
+            expect(main.state.todos[0].completedAt).toBeA('undefined');
+        });
     });
+
 });
