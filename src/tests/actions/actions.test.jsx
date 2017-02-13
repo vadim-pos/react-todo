@@ -1,8 +1,6 @@
 import expect from 'expect';
 import { actions } from '../../actions/actions.jsx';
 
-console.log(actions);
-
 describe('Actions', () => {
     it('should generate search text action', () => {
         let action = {
