@@ -15,9 +15,6 @@ let store = configureStore();
 store.subscribe(() => {
     console.log('New state: ', store.getState());
 });
-store.dispatch(actions.addTodo('qweqwqwedwqe'));
-store.dispatch(actions.setSearchText('ololo'));
-store.dispatch(actions.toggleShowCompleted());
 
 // Vendors
 import 'jquery/dist/jquery.min.js';
