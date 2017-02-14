@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 // Components 
 import Main from './components/main.jsx';
 
+// API
+import TodoAPI from './api/todo-api.jsx';
+
 // Redux
 import actions from './actions/actions.jsx';
 import configureStore from './store/configure-store.jsx';
@@ -13,13 +16,18 @@ import configureStore from './store/configure-store.jsx';
 let store = configureStore();
 
 store.subscribe(() => {
-    console.log('New state: ', store.getState());
+    let state = store.getState();
+    console.log('New state: ', state);
+
+    TodoAPI.setTodos(state.todos);
 });
+
+let initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 // Vendors
 import 'jquery/dist/jquery.min.js';
 import 'foundation-sites/dist/js/foundation.min.js';
-// Load Foundation
 $(document).foundation();
 
 // Styles

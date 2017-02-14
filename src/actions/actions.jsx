@@ -4,10 +4,16 @@ let setSearchText = searchText => {
         searchText
     };
 };
-let addTodo = (text) => {
+let addTodo = text => {
     return {
         type: 'ADD_TODO',
         text
+    };
+};
+let addTodos = todos => {
+    return {
+        type: 'ADD_TODOS',
+        todos
     };
 };
 let toggleShowCompleted = () => {
@@ -26,5 +32,6 @@ export default {
     setSearchText,
     addTodo,
     toggleShowCompleted,
-    toggleTodo
+    toggleTodo,
+    addTodos
 };
