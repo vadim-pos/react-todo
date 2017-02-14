@@ -4,7 +4,7 @@ import expect from 'expect';
 import $ from 'jquery';
 import TestUtils from 'react-addons-test-utils';
 
-import { TodoSearch } from '../../components/todo-search.jsx';
+import TodoSearch from '../../components/todo-search.jsx';
 
 describe('TodoSearch', () => {
     it('should exist', () => {

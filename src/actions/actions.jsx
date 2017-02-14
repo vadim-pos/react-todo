@@ -22,7 +22,7 @@ let toggleTodo = id => {
     };
 };
 
-export let actions = {
+export default {
     setSearchText,
     addTodo,
     toggleShowCompleted,

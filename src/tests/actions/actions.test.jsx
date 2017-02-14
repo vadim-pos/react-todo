@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { actions } from '../../actions/actions.jsx';
+import actions from '../../actions/actions.jsx';
 
 describe('Actions', () => {
     it('should generate search text action', () => {

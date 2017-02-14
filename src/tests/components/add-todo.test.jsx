@@ -11,27 +11,31 @@ describe('AddTodo', () => {
         expect(AddTodo).toExist();
     });
 
-    it('should call onAddTodo() prop with valid input data', () => {
+    it('should dispatch addTodo with valid input data', () => {
         let testText = 'test value';
+        let action = {
+            type: 'ADD_TODO',
+            text: testText
+        };
         let spy = expect.createSpy();
-        let addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+        let addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
         let $elem = $(ReactDOM.findDOMNode(addTodo));
 
         addTodo.refs.todoText.value = testText;
         TestUtils.Simulate.submit($elem.find('form')[0]);
 
-        expect(spy).toHaveBeenCalledWith(testText);
+        expect(spy).toHaveBeenCalledWith(action);
     });
 
-    it('should not call onAddTodo() prop when input data is invalid', () => {
+    it('should not dispatch addTodo when input data is invalid', () => {
         let testText = '';
         let spy = expect.createSpy();
-        let addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+        let addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
         let $elem = $(ReactDOM.findDOMNode(addTodo));
 
         addTodo.refs.todoText.value = testText;
         TestUtils.Simulate.submit($elem.find('form')[0]);
 
-        expect(spy).toNotHaveBeenCalled(testText);
+        expect(spy).toNotHaveBeenCalled();
     });
 });

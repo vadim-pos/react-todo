@@ -1,85 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import expect from 'expect';
 import $ from 'jquery';
 import TestUtils from 'react-addons-test-utils';
 
-import { Main } from '../../components/main.jsx';
+import configureStore from '../../store/configure-store.jsx';
+import Main from '../../components/main.jsx';
+import TodoList from '../../components/todo-list.jsx';
 
 describe('Main', () => {
     it('should exist', () => {
         expect(Main).toExist();
     });
 
-    describe('handleAddTodo', () => {
-        it('should add new todo item to the todos array', () => {
-            let todoText = 'Test Test';
-            let main = TestUtils.renderIntoDocument(<Main/>);
+    it('should render TodoList component', () => {
+        let store = configureStore();
+        let provider = TestUtils.renderIntoDocument(
+            <Provider store={store}>
+                <Main/>
+            </Provider>
+        );
+        let main = TestUtils.scryRenderedComponentsWithType(provider, Main)[0];
+        let todoList = TestUtils.scryRenderedComponentsWithType(main, TodoList);
 
-            main.setState({todos: []});
-            main.handleAddTodo(todoText);
-
-            expect(main.state.todos[0].text).toBe(todoText);
-        });
-
-        it('should set createdAt prop as a number of milliseconds', () => {
-            let todoText = 'Test Test';
-            let main = TestUtils.renderIntoDocument(<Main/>);
-
-            main.setState({todos: []});
-            main.handleAddTodo(todoText);
-
-            expect(main.state.todos[0].createdAt).toBeA('number');
-        });
+        expect(todoList.length).toEqual(1);
     });
-
-    describe('handleToggle', () => {
-
-        it('should toggle completed prop of an item', () => {
-            let todoTest = {
-                id: 123,
-                text: 'Test Test',
-                completed: false,
-                createdAt: 0,
-                completedAt: undefined
-            };
-            let main = TestUtils.renderIntoDocument(<Main/>);
-            main.setState({todos: [todoTest]});
-
-            expect(main.state.todos[0].completed).toBe(false);
-            main.handleToggle(todoTest.id);
-            expect(main.state.todos[0].completed).toBe(true);
-        });
-
-        it('should set completedAt prop as a number of milliseconds for completed item', () => {
-            let todoTest = {
-                id: 123,
-                text: 'Test Test',
-                completed: false,
-                createdAt: 0,
-                completedAt: 1232142
-            };
-            let main = TestUtils.renderIntoDocument(<Main/>);
-            main.setState({todos: [todoTest]});
-
-            main.handleToggle(todoTest.id);
-            expect(main.state.todos[0].completedAt).toBeA('number');
-        });
-
-        it('should set completedAt prop as undefined for incompleted item', () => {
-            let todoTest = {
-                id: 123,
-                text: 'Test Test',
-                completed: true,
-                createdAt: 0,
-                completedAt: undefined
-            };
-            let main = TestUtils.renderIntoDocument(<Main/>);
-            main.setState({todos: [todoTest]});
-
-            main.handleToggle(todoTest.id);
-            expect(main.state.todos[0].completedAt).toBeA('undefined');
-        });
-    });
-
 });

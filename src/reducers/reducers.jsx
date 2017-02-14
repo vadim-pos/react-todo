@@ -48,7 +48,7 @@ let todosReducer = (state = [], action) => {
     }
 };
 
-export let reducers = {
+export default {
     searchTextReducer,
     showCompletedReducer,
     todosReducer

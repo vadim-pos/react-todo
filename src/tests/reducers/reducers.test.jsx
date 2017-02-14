@@ -1,6 +1,6 @@
 import expect from 'expect';
 import df from 'deep-freeze-strict';
-import { reducers } from '../../reducers/reducers.jsx';
+import reducers from '../../reducers/reducers.jsx';
 
 describe('Reducers', () => {
     describe('searchTextReducer', () => {

@@ -1,4 +1,4 @@
-export let TodoAPI = {
+export default {
     setTodos(todos) {
         if (Array.isArray(todos)) {
             localStorage.setItem('todos', JSON.stringify(todos));

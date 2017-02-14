@@ -1,6 +1,6 @@
 import expect from 'expect';
 
-import { TodoAPI } from '../../api/todo-api.jsx';
+import TodoAPI from '../../api/todo-api.jsx';
 
 describe('TodoAPI', () => {
     it('should exist', () => {
