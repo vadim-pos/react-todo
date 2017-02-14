@@ -1,2 +1,1 @@
-React app boilerplate with foundation & jquery
-Ready for Heroku deploy 
+## [Heroku](http://desolate-cliffs-21633.herokuapp.com/)
