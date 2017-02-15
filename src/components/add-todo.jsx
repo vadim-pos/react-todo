@@ -9,7 +9,7 @@ export class AddTodo extends React.Component {
         let newTodoText = this.refs.todoText.value;
 
         if (newTodoText) {
-            dispatch(actions.addTodo(newTodoText));
+            dispatch(actions.startAddTodo(newTodoText));
             this.refs.todoText.value = '';
         } else {
             this.refs.todoText.focus();

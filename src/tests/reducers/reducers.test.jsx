@@ -31,14 +31,19 @@ describe('Reducers', () => {
         it('should add new todo item', () => {
             let action = {
                 type: 'ADD_TODO',
-                text: 'Test, Test, Test'
+                todo: {
+                    id: '123j21a',
+                    text: 'test',
+                    completed: false,
+                    createdAt: 123321
+                }
             };
             let state = [];
             let res = reducers.todosReducer(df(state), df(action));
             
 
             expect(res.length).toEqual(1);
-            expect(res[0].text).toEqual(action.text);
+            expect(res[0]).toEqual(action.todo);
         });
 
         it('should set completed status to opposite & update completedAt prop', () => {

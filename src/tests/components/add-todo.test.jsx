@@ -5,6 +5,7 @@ import $ from 'jquery';
 import TestUtils from 'react-addons-test-utils';
 
 import { AddTodo } from '../../components/add-todo.jsx';
+import actions from '../../actions/actions.jsx';
 
 describe('AddTodo', () => {
     it('should exist', () => {
@@ -13,10 +14,8 @@ describe('AddTodo', () => {
 
     it('should dispatch addTodo with valid input data', () => {
         let testText = 'test value';
-        let action = {
-            type: 'ADD_TODO',
-            text: testText
-        };
+        let action = actions.startAddTodo();
+
         let spy = expect.createSpy();
         let addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
         let $elem = $(ReactDOM.findDOMNode(addTodo));
