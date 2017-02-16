@@ -15,15 +15,7 @@ import configureStore from './store/configure-store.jsx';
 
 let store = configureStore();
 
-store.subscribe(() => {
-    let state = store.getState();
-    console.log('New state: ', state);
-
-    TodoAPI.setTodos(state.todos);
-});
-
-let initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+store.dispatch(actions.startAddTodos());
 
 // Vendors
 import 'jquery/dist/jquery.min.js';
