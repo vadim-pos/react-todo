@@ -22,7 +22,7 @@ export class TodoItem extends React.Component {
         };
 
         return(
-            <div className={className} onClick={() => {dispatch(actions.toggleTodo(id));}}>
+            <div className={className} onClick={() => {dispatch(actions.startToggleTodo(id, !completed));}}>
                 <div>
                     <input type="checkbox" checked={completed}/>
                 </div>

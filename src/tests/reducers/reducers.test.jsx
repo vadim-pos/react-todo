@@ -46,39 +46,28 @@ describe('Reducers', () => {
             expect(res[0]).toEqual(action.todo);
         });
 
-        it('should set completed status to opposite & update completedAt prop', () => {
-            let action1 = {
-                type: 'TOGGLE_TODO',
-                id: '123'
+        it('should update todo item of the todos state', () => {
+            let todos = [{
+                id: '12',
+                text: 'Test',
+                completed: true,
+                createdAt: 123123,
+                completedAt: 123123123
+            }];
+            let updates = {
+                completed: false,
+                completedAt: null
             };
-            let action2 = {
-                type: 'TOGGLE_TODO',
-                id: '12'
+            let action = {
+                type: 'UPDATE_TODO',
+                id: todos[0].id,
+                updates
             };
-            let state = [
-                {
-                    id: '12',
-                    text: 'Test',
-                    completed: true,
-                    createdAt: 123123,
-                    completedAt: 123123123
-                },
-                {
-                    id: '123',
-                    text: 'Test Test',
-                    completed: false,
-                    createdAt: 123123,
-                    completedAt: undefined
-                }
-            ];
-            let res1 = reducers.todosReducer(df(state), df(action1));
-            let res2 = reducers.todosReducer(df(state), df(action2));
+            let res = reducers.todosReducer(df(todos), df(action));
 
-            expect(res1[1].completed).toEqual(!state[1].completed);
-            expect(res1[1].completedAt).toBeA('number');
-
-            expect(res2[0].completed).toEqual(!state[0].completed);
-            expect(res2[0].completedAt).toEqual(undefined);
+            expect(res[0].completed).toEqual(updates.completed);
+            expect(res[0].completedAt).toEqual(updates.completedAt);
+            expect(res[0].text).toEqual(todos[0].text);
         });
 
         it('should update state with existing todos', () => {

@@ -42,10 +42,24 @@ let toggleShowCompleted = () => {
         type: 'TOGGLE_SHOW_COMPLETED'
     };
 };
-let toggleTodo = id => {
+let updateTodo = (id, updates) => {
     return {
-        type: 'TOGGLE_TODO',
-        id
+        type: 'UPDATE_TODO',
+        id,
+        updates
+    };
+};
+let startToggleTodo = (id, completed) => {
+    return (dispatch, getState) => {
+        let todoRef = firebaseRef.child(`todos/${id}`);
+        let updates = {
+            completed,
+            completedAt: completed ? moment().unix() : null
+        };
+
+        return todoRef.update(updates).then(() => {
+            dispatch(updateTodo(id, updates));
+        });
     };
 };
 
@@ -53,7 +67,8 @@ export default {
     setSearchText,
     addTodo,
     toggleShowCompleted,
-    toggleTodo,
+    updateTodo,
     addTodos,
-    startAddTodo
+    startAddTodo,
+    startToggleTodo
 };
