@@ -9,14 +9,25 @@ import Login from './components/login.jsx';
 
 // API
 import TodoAPI from './api/todo-api.jsx';
+import firebase from './firebase/index.js';
 
 // Redux
 import actions from './actions/actions.jsx';
 import configureStore from './store/configure-store.jsx';
 
 let store = configureStore();
-
 store.dispatch(actions.startAddTodos());
+
+// Redirection with firebase auth state
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        store.dispatch(actions.login(user.uid));
+        hashHistory.push('/todos');
+    } else {
+        store.dispatch(actions.logout());
+        hashHistory.push('');
+    }
+});
 
 // Vendors
 import 'jquery/dist/jquery.min.js';

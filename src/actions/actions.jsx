@@ -96,6 +96,17 @@ let startLogout = () => {
         );
     };
 };
+let login = (uid) => {
+    return {
+        type: 'LOGIN',
+        uid
+    };
+};
+let logout = () => {
+    return {
+        type: 'LOGOUT'
+    };
+};
 
 export default {
     setSearchText,
@@ -107,5 +118,7 @@ export default {
     startToggleTodo,
     startAddTodos,
     startLogin,
-    startLogout
+    startLogout,
+    login,
+    logout
 };
