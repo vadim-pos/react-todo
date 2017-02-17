@@ -23,7 +23,8 @@ module.exports = (env) => {
 				API_KEY: JSON.stringify(process.env.API_KEY),
 				AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
 				DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
-				STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
+				STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET),
+				GITHUB_ACCESS_TOKEN: JSON.stringify(process.env.GITHUB_ACCESS_TOKEN)
 			}
 		}),
 		new webpack.ProvidePlugin({
