@@ -15,6 +15,15 @@ export class Main extends React.Component {
     }
 
     render() {
+        if (!this.props.auth.uid) {
+            return(
+                <div className="row">
+                    <div className="column small-centered small-11 medium-6 large-5 text-center">
+                        <div className="callout alert">Please Login</div>
+                    </div>
+                </div>
+            );
+        }
         return(
             <div>
                 <div className="page-actions">
@@ -35,4 +44,8 @@ export class Main extends React.Component {
     }
 };
 
-export default redux.connect()(Main);
+export default redux.connect(state => {
+    return {
+        auth: state.auth
+    }
+})(Main);
