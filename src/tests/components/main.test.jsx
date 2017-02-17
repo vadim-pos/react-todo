@@ -6,7 +6,7 @@ import $ from 'jquery';
 import TestUtils from 'react-addons-test-utils';
 
 import configureStore from '../../store/configure-store.jsx';
-import Main from '../../components/main.jsx';
+import { Main } from '../../components/main.jsx';
 import TodoList from '../../components/todo-list.jsx';
 
 describe('Main', () => {

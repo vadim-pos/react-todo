@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 // Components 
 import Main from './components/main.jsx';
+import Login from './components/login.jsx';
 
 // API
 import TodoAPI from './api/todo-api.jsx';
@@ -27,7 +28,12 @@ import './scss/main.scss';
 
 ReactDOM.render(
     <Provider store={store}>
-        <Main/>
+        <Router history={hashHistory}>
+            <Route path="/">
+                <Route path="todos" component={Main}/>
+                <IndexRoute component={Login}/>  
+            </Route>
+        </Router>
     </Provider>
     , document.getElementById('app-container')
 );
