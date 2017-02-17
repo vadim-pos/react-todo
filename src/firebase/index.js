@@ -6,7 +6,6 @@ try {
         authDomain: process.env.AUTH_DOMAIN,
         databaseURL: process.env.DATABASE_URL,
         storageBucket: process.env.STORAGE_BUCKET,
-        messagingSenderId: "881698923778"
     };
     firebase.initializeApp(config);
 } catch(e) {
