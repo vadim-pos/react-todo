@@ -1,13 +1,30 @@
 const webpack = require('webpack');
 const path = require('path');
+const envFile = require('node-env-file');
 
 module.exports = (env) => {
-	const NODE_ENV = env && env.prod ? 'production' : 'development';
-	let onProduction = NODE_ENV === 'production';
+	function getEnv(env) {
+		if (env && env.prod) { return 'production'; }
+		if (env && env.test) { return 'test'; }
+		return 'development';
+	}
+
+	const NODE_ENV = getEnv(env);
+	const onProduction = NODE_ENV === 'production';
+
+	try {
+		envFile(path.join(__dirname, 'config/' + NODE_ENV + '.env'));
+	} catch(e) {}
 	
 	let plugins = [
 		new webpack.DefinePlugin({
-			'process.env': { NODE_ENV: JSON.stringify(NODE_ENV) }
+			'process.env': {
+				NODE_ENV: JSON.stringify(NODE_ENV),
+				API_KEY: JSON.stringify(process.env.API_KEY),
+				AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
+				DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
+				STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
+			}
 		}),
 		new webpack.ProvidePlugin({
 			'$': 'jquery',

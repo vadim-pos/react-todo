@@ -1,5 +1,5 @@
-let isOnProduction = false;
-let webpackConfig = require('./webpack.config')(isOnProduction);
+let env = {test: true};
+let webpackConfig = require('./webpack.config')(env);
 
 module.exports = (config) => {
     config.set({
