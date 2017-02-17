@@ -16,12 +16,12 @@ import actions from './actions/actions.jsx';
 import configureStore from './store/configure-store.jsx';
 
 let store = configureStore();
-store.dispatch(actions.startAddTodos());
 
 // Redirection with firebase auth state
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         store.dispatch(actions.login(user.uid));
+        store.dispatch(actions.startAddTodos());
         hashHistory.push('/todos');
     } else {
         store.dispatch(actions.logout());
